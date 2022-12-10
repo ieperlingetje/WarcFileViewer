@@ -61,6 +61,10 @@
             this.sfdCurrentFile = new System.Windows.Forms.SaveFileDialog();
             this.bgwExportItems = new System.ComponentModel.BackgroundWorker();
             this.lblFileInfo = new System.Windows.Forms.Label();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblAchiveMetadata = new System.Windows.Forms.Label();
             this.tsMenuBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictItem)).BeginInit();
@@ -85,9 +89,12 @@
             this.tsFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsFileOpen,
+            this.toolStripSeparator2,
             this.tsExtractCurrenSelect,
             this.tsExtractAllSelected,
-            this.tsExtractAll});
+            this.tsExtractAll,
+            this.toolStripSeparator1,
+            this.infoToolStripMenuItem});
             this.tsFile.Image = ((System.Drawing.Image)(resources.GetObject("tsFile.Image")));
             this.tsFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsFile.Name = "tsFile";
@@ -133,7 +140,7 @@
             this.dtgResult.Name = "dtgResult";
             this.dtgResult.RowHeadersWidth = 51;
             this.dtgResult.RowTemplate.Height = 24;
-            this.dtgResult.Size = new System.Drawing.Size(1234, 723);
+            this.dtgResult.Size = new System.Drawing.Size(1234, 713);
             this.dtgResult.TabIndex = 1;
             this.dtgResult.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgResult_CellContentClick);
             this.dtgResult.SelectionChanged += new System.EventHandler(this.dtgResult_SelectionChanged);
@@ -229,9 +236,9 @@
             // 
             this.prgProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.prgProgress.Location = new System.Drawing.Point(12, 823);
+            this.prgProgress.Location = new System.Drawing.Point(121, 823);
             this.prgProgress.Name = "prgProgress";
-            this.prgProgress.Size = new System.Drawing.Size(1417, 23);
+            this.prgProgress.Size = new System.Drawing.Size(1276, 23);
             this.prgProgress.TabIndex = 11;
             this.prgProgress.Visible = false;
             // 
@@ -246,6 +253,7 @@
             // 
             // txtSearch
             // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.Location = new System.Drawing.Point(1074, 27);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(173, 22);
@@ -254,6 +262,7 @@
             // 
             // lblSearch
             // 
+            this.lblSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSearch.AutoSize = true;
             this.lblSearch.Location = new System.Drawing.Point(1016, 33);
             this.lblSearch.Name = "lblSearch";
@@ -355,11 +364,36 @@
             this.lblFileInfo.Size = new System.Drawing.Size(0, 17);
             this.lblFileInfo.TabIndex = 23;
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(297, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(297, 6);
+            // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(300, 26);
+            this.infoToolStripMenuItem.Text = "Info";
+            // 
+            // lblAchiveMetadata
+            // 
+            this.lblAchiveMetadata.AutoSize = true;
+            this.lblAchiveMetadata.Location = new System.Drawing.Point(12, 823);
+            this.lblAchiveMetadata.Name = "lblAchiveMetadata";
+            this.lblAchiveMetadata.Size = new System.Drawing.Size(0, 17);
+            this.lblAchiveMetadata.TabIndex = 23;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1712, 858);
+            this.Controls.Add(this.lblAchiveMetadata);
             this.Controls.Add(this.txtCustom);
             this.Controls.Add(this.chbxCustom);
             this.Controls.Add(this.chbxVideo);
@@ -430,6 +464,10 @@
         private System.Windows.Forms.SaveFileDialog sfdCurrentFile;
         private System.ComponentModel.BackgroundWorker bgwExportItems;
         private System.Windows.Forms.Label lblFileInfo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.Label lblAchiveMetadata;
     }
 }
 

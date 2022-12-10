@@ -20,6 +20,8 @@ namespace WARCFileViewer
 
         private DataTable _dtResult = new DataTable();
 
+        private int _iFilesInArchive = 0;
+
         public frmMain()
         {
             InitializeComponent();
@@ -72,6 +74,7 @@ namespace WARCFileViewer
                     prgProgress.Visible = true;
                     lblProgressInfo.Visible = true;
                     lblProgressInfo.Text = "Reading WARC file";
+                    lblAchiveMetadata.Text = "Busy";
                     bgwParseFile.RunWorkerAsync();
                    
 
@@ -144,8 +147,12 @@ namespace WARCFileViewer
 
             //MessageBox.Show("Valid WARC File and has " + _fileparser.GetNbrOfFilesInWarcArchive().ToString() + " files.");
             List<WarcFileItem> lstFiles = _fileparser.GetListOfFiles();
+            _iFilesInArchive = lstFiles.Count();
+            lblAchiveMetadata.Text = _iFilesInArchive.ToString() + " files in archive.";
 
             dtgResult.DataSource = _dtResult;
+            //url column should be bigger
+            dtgResult.Columns[1].Width = 300;
 
             if(dtgResult.RowCount >= 0)
             {
@@ -388,9 +395,23 @@ namespace WARCFileViewer
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
+            //keyboard shortcuts
+            //ctrl+S for single file save
             if(e.Control && e.KeyCode == Keys.S)
             {
                 ExtractCurrentlySelected();
+            }
+
+            //ctrl + O to open archive
+            if(e.Control && e.KeyCode == Keys.O)
+            {
+                OpenWarcFile();
+            }
+
+            //ctrl + F to focus on search field
+            if(e.Control && e.KeyCode == Keys.F)
+            {
+                txtSearch.Focus();
             }
         }
 
@@ -444,7 +465,19 @@ namespace WARCFileViewer
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            _dtResult.DefaultView.RowFilter = string.Format("URL LIKE '%{0}%'", txtSearch.Text);
+            //check if data is available before starting query
+            if(dtgResult.DataSource != null)
+            {
+                _dtResult.DefaultView.RowFilter = string.Format("URL LIKE '%{0}%'", txtSearch.Text);
+                if(txtSearch.Text.Length > 0)
+                {
+                    lblAchiveMetadata.Text = (dtgResult.Rows.Count.ToString() + " item(s) match search criteria");
+                } else
+                {
+                    lblAchiveMetadata.Text = _iFilesInArchive.ToString() + " files in archive.";
+                }
+            }
+            
         }
     }
 }
