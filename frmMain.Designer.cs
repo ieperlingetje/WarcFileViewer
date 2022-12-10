@@ -60,11 +60,13 @@
             this.txtCustom = new System.Windows.Forms.TextBox();
             this.sfdCurrentFile = new System.Windows.Forms.SaveFileDialog();
             this.bgwExportItems = new System.ComponentModel.BackgroundWorker();
+            this.lblFileInfo = new System.Windows.Forms.Label();
             this.tsMenuBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictItem)).BeginInit();
             this.grpFileInfo.SuspendLayout();
             this.tbcProperties.SuspendLayout();
+            this.tpFileProperties.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsMenuBar
@@ -122,6 +124,7 @@
             // 
             // dtgResult
             // 
+            this.dtgResult.AllowUserToAddRows = false;
             this.dtgResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -184,6 +187,7 @@
             // 
             // tpFileProperties
             // 
+            this.tpFileProperties.Controls.Add(this.lblFileInfo);
             this.tpFileProperties.Location = new System.Drawing.Point(4, 25);
             this.tpFileProperties.Name = "tpFileProperties";
             this.tpFileProperties.Padding = new System.Windows.Forms.Padding(3);
@@ -220,7 +224,6 @@
             this.lblNoPreview.Size = new System.Drawing.Size(138, 17);
             this.lblNoPreview.TabIndex = 8;
             this.lblNoPreview.Text = "No preview available";
-            this.lblNoPreview.Visible = false;
             // 
             // prgProgress
             // 
@@ -343,6 +346,14 @@
             this.bgwExportItems.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwExportItems_ProgressChanged);
             this.bgwExportItems.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExportItems_RunWorkerCompleted);
             // 
+            // lblFileInfo
+            // 
+            this.lblFileInfo.AutoSize = true;
+            this.lblFileInfo.Location = new System.Drawing.Point(16, 12);
+            this.lblFileInfo.Name = "lblFileInfo";
+            this.lblFileInfo.Size = new System.Drawing.Size(0, 17);
+            this.lblFileInfo.TabIndex = 23;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -377,6 +388,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictItem)).EndInit();
             this.grpFileInfo.ResumeLayout(false);
             this.tbcProperties.ResumeLayout(false);
+            this.tpFileProperties.ResumeLayout(false);
+            this.tpFileProperties.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -415,6 +428,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsExtractAll;
         private System.Windows.Forms.SaveFileDialog sfdCurrentFile;
         private System.ComponentModel.BackgroundWorker bgwExportItems;
+        private System.Windows.Forms.Label lblFileInfo;
     }
 }
 

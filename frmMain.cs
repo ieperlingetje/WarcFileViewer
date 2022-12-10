@@ -131,15 +131,19 @@ namespace WARCFileViewer
             dtgResult.Columns.Add("MimeType", "MimeType");
             dtgResult.Columns.Add("Date", "Date");
             dtgResult.Columns.Add("Filesize", "Filesize");
-
+            int index = 0;
             foreach (WarcFileItem file in lstFiles)
             {
-                int index = dtgResult.Rows.Add();
+                index = dtgResult.Rows.Add();
 
                 dtgResult.Rows[index].Cells["URL"].Value = file.url;
                 dtgResult.Rows[index].Cells["MimeType"].Value = file.MimeType;
                 dtgResult.Rows[index].Cells["Date"].Value = file.RetrievedAt;
                 dtgResult.Rows[index].Cells["Filesize"].Value = WARCFileReaderExtensions.ByteSize(file.FileSize);
+            }
+            if(dtgResult.RowCount >= 0)
+            {
+                UpdatePreviewWindow(0);
             }
         }
 
@@ -158,15 +162,19 @@ namespace WARCFileViewer
 
         private void dtgResult_SelectionChanged(object sender, EventArgs e)
         {
-            int RowIndex = dtgResult.CurrentRow.Index;
-            UpdatePreviewWindow(RowIndex);
+            if(dtgResult.RowCount > 2)
+            {
+                int RowIndex = dtgResult.CurrentRow.Index;
+                UpdatePreviewWindow(RowIndex);
+            }
+
 
         }
 
 
         private void UpdatePreviewWindow(int RowIndex)
         {
-            if (RowIndex > 0 && _fileparser != null)
+            if (dtgResult.RowCount > 0 && RowIndex >= 0 && _fileparser != null)
             {
                 DataGridViewRow row = dtgResult.Rows[RowIndex];
                 string url = row.Cells["URL"].Value.ToString();
@@ -196,6 +204,9 @@ namespace WARCFileViewer
                     pictItem.Visible = false;
                     lblNoPreview.Visible = true;
                 }
+
+                //update info tab
+                lblFileInfo.Text = "File name: " + selectedItem.Filename + "\r\nFile size: " + WARCFileReaderExtensions.ByteSize(selectedItem.FileSize) + "\r\nMime type: " + selectedItem.MimeType;
             }
         }
 

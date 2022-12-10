@@ -223,6 +223,8 @@ namespace WARCFileViewer
                     lPositionAtLastRead = sr.GetPosition();
 
                 }
+                //add last file to list
+                _lstWarcFileItesms.Add(_currentFile);
             }
 
 
