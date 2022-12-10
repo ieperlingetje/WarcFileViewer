@@ -80,7 +80,7 @@
             this.tsFile});
             this.tsMenuBar.Location = new System.Drawing.Point(0, 0);
             this.tsMenuBar.Name = "tsMenuBar";
-            this.tsMenuBar.Size = new System.Drawing.Size(1712, 27);
+            this.tsMenuBar.Size = new System.Drawing.Size(1712, 31);
             this.tsMenuBar.TabIndex = 0;
             this.tsMenuBar.Text = "toolStrip1";
             // 
@@ -98,7 +98,7 @@
             this.tsFile.Image = ((System.Drawing.Image)(resources.GetObject("tsFile.Image")));
             this.tsFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsFile.Name = "tsFile";
-            this.tsFile.Size = new System.Drawing.Size(46, 24);
+            this.tsFile.Size = new System.Drawing.Size(46, 28);
             this.tsFile.Text = "File";
             // 
             // tsFileOpen
@@ -244,7 +244,7 @@
             // 
             // lblProgressInfo
             // 
-            this.lblProgressInfo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblProgressInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblProgressInfo.AutoSize = true;
             this.lblProgressInfo.Location = new System.Drawing.Point(1435, 823);
             this.lblProgressInfo.Name = "lblProgressInfo";
@@ -382,6 +382,7 @@
             // 
             // lblAchiveMetadata
             // 
+            this.lblAchiveMetadata.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAchiveMetadata.AutoSize = true;
             this.lblAchiveMetadata.Location = new System.Drawing.Point(12, 823);
             this.lblAchiveMetadata.Name = "lblAchiveMetadata";
