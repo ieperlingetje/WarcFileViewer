@@ -195,7 +195,7 @@ namespace WARCFileViewer
 
                 WarcFileItem selectedItem = _fileparser.GetListOfFiles().Find(r => r.url == url);
 
-
+                string sImageMetaData = "";
                 if (selectedItem.MimeType == "image/jpeg"
                     || selectedItem.MimeType == "image/gif")
                 {
@@ -206,6 +206,8 @@ namespace WARCFileViewer
                         byte[] imageData = _fileparser.GetFileData(selectedItem);
                         MemoryStream stream = new MemoryStream(imageData);
                         pictItem.Image = Image.FromStream(stream);
+                        sImageMetaData = "\r\nImage height: " + pictItem.Image.Height.ToString() + "px"
+                                        + "\r\nImage width:" + pictItem.Image.Width.ToString() + "px";
                     } catch {
                         pictItem.Visible = false;
                         lblNoPreview.Visible = true;
@@ -223,6 +225,7 @@ namespace WARCFileViewer
                                    "\r\nURL: " + selectedItem.url +
                                    "\r\nFile size: " + WARCFileReaderExtensions.ByteSize(selectedItem.FileSize) +
                                    "\r\nMime type: " + selectedItem.MimeType +
+                                    sImageMetaData +
                                    "\r\nDate archived: " + selectedItem.RetrievedAt; 
             }
         }
