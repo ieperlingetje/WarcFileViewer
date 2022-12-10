@@ -18,6 +18,8 @@ namespace WARCFileViewer
 
         private WarcFileParser _fileparser = null;
 
+        private DataTable _dtResult = new DataTable();
+
         public frmMain()
         {
             InitializeComponent();
@@ -101,7 +103,26 @@ namespace WARCFileViewer
         {
             _fileparser.OnProgress += OnProgress;
             _fileparser.ParseWARCFile();
-            
+            _dtResult = new DataTable();
+            _dtResult.Columns.Add(new DataColumn("Export",typeof(bool)));
+            _dtResult.Columns.Add("URL");
+            _dtResult.Columns.Add("MimeType");
+            _dtResult.Columns.Add("Date");
+            _dtResult.Columns.Add("Filesize");
+            int index = 0;
+            foreach (WarcFileItem file in _fileparser.GetListOfFiles())
+            {
+                _dtResult.Rows.Add();
+
+                _dtResult.Rows[index]["URL"] = file.url;
+                _dtResult.Rows[index]["MimeType"] = file.MimeType;
+                _dtResult.Rows[index]["Date"] = file.RetrievedAt;
+                _dtResult.Rows[index]["Filesize"] = WARCFileReaderExtensions.ByteSize(file.FileSize);
+                index++;
+            }
+
+
+
         }
 
         private void OnProgress(object sender, WarcFileParserEventArgs e)
@@ -124,23 +145,8 @@ namespace WARCFileViewer
             //MessageBox.Show("Valid WARC File and has " + _fileparser.GetNbrOfFilesInWarcArchive().ToString() + " files.");
             List<WarcFileItem> lstFiles = _fileparser.GetListOfFiles();
 
-            DataGridViewCheckBoxColumn dtgchbxcol = new DataGridViewCheckBoxColumn();
-            dtgchbxcol.Name = "Export";
-            dtgResult.Columns.Add(dtgchbxcol);
-            dtgResult.Columns.Add("URL", "URL");
-            dtgResult.Columns.Add("MimeType", "MimeType");
-            dtgResult.Columns.Add("Date", "Date");
-            dtgResult.Columns.Add("Filesize", "Filesize");
-            int index = 0;
-            foreach (WarcFileItem file in lstFiles)
-            {
-                index = dtgResult.Rows.Add();
+            dtgResult.DataSource = _dtResult;
 
-                dtgResult.Rows[index].Cells["URL"].Value = file.url;
-                dtgResult.Rows[index].Cells["MimeType"].Value = file.MimeType;
-                dtgResult.Rows[index].Cells["Date"].Value = file.RetrievedAt;
-                dtgResult.Rows[index].Cells["Filesize"].Value = WARCFileReaderExtensions.ByteSize(file.FileSize);
-            }
             if(dtgResult.RowCount >= 0)
             {
                 UpdatePreviewWindow(0);
@@ -206,7 +212,11 @@ namespace WARCFileViewer
                 }
 
                 //update info tab
-                lblFileInfo.Text = "File name: " + selectedItem.Filename + "\r\nFile size: " + WARCFileReaderExtensions.ByteSize(selectedItem.FileSize) + "\r\nMime type: " + selectedItem.MimeType;
+                lblFileInfo.Text = "File name: " + selectedItem.Filename +
+                                   "\r\nURL: " + selectedItem.url +
+                                   "\r\nFile size: " + WARCFileReaderExtensions.ByteSize(selectedItem.FileSize) +
+                                   "\r\nMime type: " + selectedItem.MimeType +
+                                   "\r\nDate archived: " + selectedItem.RetrievedAt; 
             }
         }
 
@@ -430,6 +440,11 @@ namespace WARCFileViewer
                 prgProgress.Value = e.ProgressPercentage;
                 lblProgressInfo.Text = "Exporting files: " + e.ProgressPercentage.ToString() +"% complete";
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            _dtResult.DefaultView.RowFilter = string.Format("URL LIKE '%{0}%'", txtSearch.Text);
         }
     }
 }
